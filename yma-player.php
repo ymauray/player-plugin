@@ -1,6 +1,6 @@
 <?php
 /**
- * Plugin Name: Player
+ * Plugin Name: Yannick's Player
  * Plugin URI: http://github.com/yannick.mauray/player-plugin
  * Description: A player plugin for PowerPress
  * Version: 0.0.1
@@ -21,35 +21,53 @@ add_filter( 'powerpress_player', function ( $content, $media_url, $EpisodeData =
 	// Remove original filter
 	remove_filter( 'powerpress_player', 'powerpressplayer_player_audio', 10 );
 
-	if( empty($post->ID) || !is_object($post) ) {
+	if ( empty( $post->ID ) || ! is_object( $post ) ) {
 		add_filter( 'powerpress_player', 'powerpressplayer_player_audio', 10, 3 );
+
 		return $content;
 	}
 
-	$cue_sheet = get_post_meta( $post->ID, 'cuesheet', TRUE );
+	$cue_sheet = get_post_meta( $post->ID, 'cuesheet', true );
 
-	if (empty( $cue_sheet )) {
+	if ( empty( $cue_sheet ) ) {
 		add_filter( 'powerpress_player', 'powerpressplayer_player_audio', 10, 3 );
+
 		return $content;
 	}
 
-	$extension = powerpressplayer_get_extension($media_url);
-	switch( $extension ) {
+	$extension = powerpressplayer_get_extension( $media_url );
+	switch ( $extension ) {
 		case 'mp3':
 		case 'ogg':
-			$content .= build_player_player($media_url, $EpisodeData);
-		break;
+			$content .= build_player_player( $media_url, $EpisodeData );
+			break;
 		default:
 			add_filter( 'powerpress_player', 'powerpressplayer_player_audio', 10, 3 );
 	}
+
 	return $content;
 }, 3, 3 );
+
+add_action( 'init', function () {
+	wp_enqueue_script( 'yma-player', plugin_dir_url( PLAYER_MAIN_FILE ) . 'yma-player.js', array( 'jquery' ) );
+	wp_enqueue_style( 'yma-player', plugin_dir_url( PLAYER_MAIN_FILE ) . 'yma-player.css' );
+} );
 
 /**
  * @param $media_url
  * @param array $EpisodeData
+ *
  * @return string
  */
-function build_player_player($media_url, $EpisodeData = array() ) {
+function build_player_player( $media_url, $EpisodeData = array() ) {
+	$player_id = powerpressplayer_get_next_id();
+	$content   = <<<EOF
+<div class="powerpress_player" id="powerpress_player_{$player_id}">
+	<div class="yma_player">
+		<div class="yma_player_play_button"></div>
+	</div>
+</div>
+EOF;
 
+	return $content;
 }

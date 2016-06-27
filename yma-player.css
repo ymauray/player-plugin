@@ -1,0 +1,63 @@
+.yma_player {
+    font-size: 70px;
+    border-color: lightgray;
+}
+
+.yma_player_play_button:before {
+    border-color: #FF0000;
+}
+
+.yma_player_play_button:after {
+    border-color: #FFFFFF;
+}
+
+/* --- */
+
+.yma_player {
+box-sizing: border-box;
+    position: relative;
+    height: 1em;
+    color: white;
+    border-width: 1px 0;
+    border-style: solid;
+}
+
+.yma_player *,
+.yma_player *:before,
+.yma_player *:after {
+    box-sizing: inherit;
+}
+
+.yma_player_play_button {
+    height: 1em;
+    width: 1em;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.yma_player_play_button:before {
+    content: '';
+    border-width: .3em;
+    border-style: solid;
+    border-radius: .3em;
+    position: absolute;
+    top: .2em;
+    left: .2em;
+    width: 0;
+    height: 0;
+}
+
+.yma_player_play_button:after {
+    content: '';
+    position: absolute;
+    top: .3em;
+    left: .35em;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: .2em 0 .2em .4em;
+    border-top-color: transparent;
+    border-right-color: transparent;
+    border-bottom-color: transparent;
+}
