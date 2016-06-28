@@ -1,37 +1,42 @@
-/* base: 3em; */
-/* padding: .5em */
-/* color: #000000 */
+@base: 3em; /* base: 3em; */
+@padding: .5em; /* padding: .5em */
+@color: #000000; /* color: #000000 */
+
 .yma_player {
   border-color: lightgrey;
-  color: #000000;
-  /* color: @color; */
+  color: @color; /* color: @color; */
   border-width: 1px 0;
   border-style: solid;
-  height: 3em;
-  /* height: @base; */
-  padding: 0.5em 3em;
-  /* padding: @padding @base; */
+  height: @base; /* height: @base; */
+  padding: @padding @base; /* padding: @padding @base; */
   position: relative;
+
+  *,
+  *:before,
+  *:after {
+    box-sizing: inherit;
+  }
 }
-.yma_player *,
-.yma_player *:before,
-.yma_player *:after {
-  box-sizing: inherit;
-}
+
 .yma_player_display {
   text-align: center;
+
 }
+
 .yma_player_artist,
 .yma_player_title {
   font-size: .8em;
 }
+
 /* Option 1 : on the same line */
 .yma_player_artist:after {
   content: ' — ';
 }
+
 .yma_player_artist.single:after {
   content: '';
 }
+
 /* Option 2 : on two lines */
 /*
 .yma_player_artist,
@@ -39,45 +44,46 @@
   display: block;
 }
 */
+
 .yma_player_play_button {
   position: absolute;
-  top: 0.5em;
-  /* top: @padding; */
+  top: @padding; /* top: @padding; */
   left: 0;
   margin: 0;
   padding: 0;
-  width: 3em;
-  /* width: @base; */
-  height: 3em;
-  /* height: @base; */
+  width: @base; /* width: @base; */
+  height: @base; /* height: @base; */
   cursor: pointer;
+
+  i {
+    position: absolute;
+    font-size: @base; /* font-size: @base; */
+    width: 1em;
+    height: 1em;
+    line-height: 1em;
+  }
 }
-.yma_player_play_button i {
-  position: absolute;
-  font-size: 3em;
-  /* font-size: @base; */
-  width: 1em;
-  height: 1em;
-  line-height: 1em;
-}
+
 .yma_player_background_bar,
 .yma_player_progress_bar {
   position: absolute;
-  top: -0.1em;
+  top: -.1em;
   left: 0;
   height: .2em;
 }
+
 .yma_player_background_bar {
   width: 100%;
   background-color: transparent;
   border-radius: .1em;
 }
+
 .yma_player_progress_bar {
   width: 0;
-  background-color: #000000;
-  /* background-color: @color; */
+  background-color: @color; /* background-color: @color; */
   border-radius: .1em;
 }
+
 .yma_player_volume_bar {
   position: absolute;
   bottom: 0;
@@ -88,16 +94,18 @@
   border-left: .3em solid transparent;
   border-right: .3em solid transparent;
 }
+
 .yma_player_volume_button {
   content: '';
   position: absolute;
   bottom: 3em;
-  left: -0.5em;
+  left: -.5em;
   width: 1em;
   height: .3em;
-  background-color: #000000;
+  background-color: @color;
   display: none;
 }
+
 /*
 .yma_player {
     color: #FF0000;
@@ -117,6 +125,7 @@
 }
 */
 /* --- */
+
 /*
 .yma_player {
     box-sizing: border-box;
