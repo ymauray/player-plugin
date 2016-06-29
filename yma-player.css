@@ -13,27 +13,41 @@
   padding: 8px 48px;
   /* padding: (@base / 2) (3 * @base); */
   position: relative;
+  box-sizing: content-box;
 }
 .yma_player *,
 .yma_player *:before,
 .yma_player *:after {
   box-sizing: inherit;
 }
-.yma_player_display {
+.yma_player .yma_player_display {
   text-align: center;
 }
-.yma_player_artist,
-.yma_player_title {
+.yma_player .yma_player_display .yma_player_artist {
   font-size: 12px;
   /* font-size: @text; */
+  line-height: 24px;
+  /* line-height: (1.5 * @base); */
 }
-.yma_player_artist:after {
+.yma_player .yma_player_display .yma_player_artist:after {
   content: ' — ';
 }
-.yma_player_artist.single:after {
+.yma_player .yma_player_display .yma_player_artist.single:after {
   content: '';
 }
-.yma_player_play_button {
+.yma_player .yma_player_display .yma_player_title {
+  font-size: 12px;
+  /* font-size: @text; */
+  line-height: 24px;
+  /* line-height: (1.5 * @base); */
+}
+.yma_player .yma_player_display .yma_player_post_title {
+  font-size: 16px;
+  /* font-size: @base; */
+  line-height: 24px;
+  /* line-height: (1.5 * @base); */
+}
+.yma_player .yma_player_play_button {
   position: absolute;
   top: 8px;
   /* top: (@base / 2); */
@@ -46,7 +60,7 @@
   /* height: (3 * @base); */
   cursor: pointer;
 }
-.yma_player_play_button i {
+.yma_player .yma_player_play_button i {
   position: absolute;
   font-size: 48px;
   /* font-size: (3 * @base); */
@@ -57,8 +71,8 @@
   line-height: 48px;
   /* line-height: (3 * @base); */
 }
-.yma_player_background_bar,
-.yma_player_progress_bar {
+.yma_player .yma_player_background_bar,
+.yma_player .yma_player_progress_bar {
   position: absolute;
   top: -9.6px;
   /* top: (-.6 * @base); */
@@ -73,15 +87,15 @@
   border-style: solid;
   border-color: transparent;
 }
-.yma_player_background_bar {
+.yma_player .yma_player_background_bar {
   width: 100%;
   background-color: transparent;
 }
-.yma_player_progress_bar {
+.yma_player .yma_player_progress_bar {
   width: 0;
   background-color: transparent;
 }
-.yma_player_progress_bar:after {
+.yma_player .yma_player_progress_bar:after {
   position: absolute;
   top: -1.6px;
   /* top: (-.1 * @base); */
@@ -95,10 +109,10 @@
   background: black;
   border-radius: 16px;
 }
-.yma_player_progress_bar.init:after {
+.yma_player .yma_player_progress_bar.init:after {
   display: none;
 }
-.yma_player_volume_bar {
+.yma_player .yma_player_volume_bar {
   position: absolute;
   bottom: 0;
   top: 0;
@@ -114,7 +128,7 @@
   width: 1px;
   background-color: lightgray;
 }
-.yma_player_volume_button {
+.yma_player .yma_player_volume_bar .yma_player_volume_button {
   content: '';
   position: absolute;
   left: -2px;
