@@ -3,7 +3,7 @@
  * Plugin Name:       Yannick's Player
  * Plugin URI:        http://github.com/ymauray/yma-player
  * Description:       A player plugin for PowerPress
- * Version:           0.1.0
+ * Version:           0.1.1
  * Require WP:        4.5
  * Requires at least: 4.5
  * Tested up to:      4.5.2
