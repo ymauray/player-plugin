@@ -22,7 +22,6 @@ define( 'PLAYER_MAIN_FILE', __FILE__ );
 
 add_filter( 'powerpress_player', function ( $content, $media_url, $EpisodeData = array() ) {
 	global $post;
-	global $wp_filter;
 
 	// Remove original filter
 	remove_filter( 'powerpress_player', 'powerpressplayer_player_audio', 10 );

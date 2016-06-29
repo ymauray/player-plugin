@@ -1,5 +1,5 @@
-/* base: 3em; */
-/* padding: .5em */
+/* base: 16px; */
+/* text: 12px; */
 /* color: #000000 */
 /* @background: #FFFFFF; */
 .yma_player {
@@ -8,10 +8,10 @@
   /* color: @color; */
   border-width: 1px 0;
   border-style: solid;
-  height: 3em;
-  /* height: @base; */
-  padding: 0.5em 3em;
-  /* padding: @padding @base; */
+  height: 48px;
+  /* height: (3 * @base); */
+  padding: 8px 48px;
+  /* padding: (@base / 2) (3 * @base); */
   position: relative;
 }
 .yma_player *,
@@ -24,7 +24,8 @@
 }
 .yma_player_artist,
 .yma_player_title {
-  font-size: .8em;
+  font-size: 12px;
+  /* font-size: @text; */
 }
 .yma_player_artist:after {
   content: ' — ';
@@ -34,34 +35,41 @@
 }
 .yma_player_play_button {
   position: absolute;
-  top: 0.5em;
-  /* top: @padding; */
+  top: 8px;
+  /* top: (@base / 2); */
   left: 0;
   margin: 0;
   padding: 0;
-  width: 3em;
-  /* width: @base; */
-  height: 3em;
-  /* height: @base; */
+  width: 48px;
+  /* width: (3 * @base); */
+  height: 48px;
+  /* height: (3 * @base); */
   cursor: pointer;
 }
 .yma_player_play_button i {
   position: absolute;
-  font-size: 3em;
-  /* font-size: @base; */
-  width: 1em;
-  height: 1em;
-  line-height: 1em;
+  font-size: 48px;
+  /* font-size: (3 * @base); */
+  width: 48px;
+  /* width: (3 * @base); */
+  height: 48px;
+  /* height: (3 * @base); */
+  line-height: 48px;
+  /* line-height: (3 * @base); */
 }
 .yma_player_background_bar,
 .yma_player_progress_bar {
   position: absolute;
-  top: -0.6em;
+  top: -9.6px;
+  /* top: (-.6 * @base); */
   left: 0;
-  height: .2em;
+  height: 3.2px;
+  /* height: (.2 * @base); */
   cursor: pointer;
-  border-radius: .1em;
-  border-width: .5em 0;
+  border-radius: 1.6px;
+  /* border-radius: (.1 * @base); */
+  border-width: 8px 0;
+  /* border-width: (.5 * @base) 0; */
   border-style: solid;
   border-color: transparent;
 }
@@ -72,17 +80,20 @@
 .yma_player_progress_bar {
   width: 0;
   background-color: transparent;
-  /* background-color: @color; */
 }
 .yma_player_progress_bar:after {
   position: absolute;
-  top: -0.1em;
-  right: -0.2em;
-  width: .4em;
-  height: .4em;
+  top: -1.6px;
+  /* top: (-.1 * @base); */
+  right: -3.2px;
+  /* right: (-.2 * @base); */
+  width: 6.4px;
+  /* width: (.4 * @base); */
+  height: 6.4px;
+  /* height: (.4 * @base); */
   content: '';
   background: black;
-  border-radius: 1em;
+  border-radius: 16px;
 }
 .yma_player_progress_bar.init:after {
   display: none;
@@ -92,10 +103,13 @@
   bottom: 0;
   top: 0;
   right: 0;
-  border-width: 0 .5em;
+  border-width: 0 8px;
+  /* border-width: 0 (.5 * @base); */
   border-style: solid;
   border-color: #ffffff;
-  margin: .5em 0;
+  /* border-color: @background; */
+  margin: 8px 0;
+  /* margin: (.5 * @base) 0; */
   cursor: pointer;
   width: 1px;
   background-color: lightgray;
@@ -108,6 +122,6 @@
   width: 5px;
   height: 5px;
   top: -2px;
-  border-radius: 1em;
+  border-radius: 16px;
   display: none;
 }
