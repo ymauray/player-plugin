@@ -1,27 +1,30 @@
-(function($) {
+(function ($) {
 
     'use strict';
 
-    $(document).ready(function() {
+    $(document).ready(function () {
 
         var audios = $('.yma_player audio');
-        audios.on('play', function(event) {
+        audios.on('play', function (event) {
             var target = event.target;
             var id = $(target).attr('data-player-id');
             var player = $('#yma_player_' + id);
         });
 
-        audios.on('pause', function(a, b, c, d, e, f) {
-            
+        audios.on('pause', function (a, b, c, d, e, f) {
+
         });
 
-        audios.on('timeupdate', function(event) {
+        audios.on('progress', function (event) {
+        });
+
+        audios.on('timeupdate', function (event) {
             var target = event.target;
             var id = $(target).attr('data-player-id');
             var player = $('#yma_player_' + id);
             if (target.duration > 0) {
                 var advance = 100 * target.currentTime / target.duration;
-                $('.yma_player_progress_bar', player).css('width', advance + '%');
+                $('.yma_player_progress_bar', player).css('width', advance + '%').removeClass('init');
             }
             var options = $('datalist option', player);
             for (var i = options.length - 1; i >= 0; i--) {
@@ -37,7 +40,22 @@
             }
         });
 
-        $('.yma_player_background_bar').click(function(event) {
+        audios.on('volumechange', function (event) {
+            var target = event.target;
+            var id = $(target).attr('data-player-id');
+            var player = $('#yma_player_' + id);
+            var volume_bar = $('.yma_player_volume_bar', player);
+            var volume_button = $('.yma_player_volume_button', player);
+            var volume_bar_height = volume_bar[0].offsetHeight;
+            var offset = (volume_bar_height * (1 - this.volume)) - 2;
+            volume_button.css('top', offset + 'px').css('display', 'initial');
+        });
+
+        audios.each(function (index, audio) {
+            audio.volume = .75;
+        });
+
+        $('.yma_player_background_bar').click(function (event) {
             var player_id = $(this).attr('data-player-id');
             var audio = $('audio#yma_player_audio_' + player_id)[0];
             var width = event.target.offsetWidth;
@@ -46,7 +64,7 @@
             audio.currentTime = audio.duration * percent;
         });
 
-        $('.yma_player_progress_bar').click(function(event) {
+        $('.yma_player_progress_bar').click(function (event) {
             var player_id = $(this).attr('data-player-id');
             var audio = $('audio#yma_player_audio_' + player_id)[0];
             var width = event.target.offsetWidth;
@@ -55,7 +73,7 @@
             audio.currentTime = audio.currentTime * percent;
         });
 
-        $('.yma_player_play_button').click(function(event) {
+        $('.yma_player_play_button').click(function (event) {
             event.preventDefault();
             var play_circle = $('.fa-play-circle', $(this));
             var player_id = $(this).attr('data-player-id');
@@ -69,20 +87,14 @@
             }
         });
 
-        var volume_bars = $('.yma_player_volume_bar');
-        volume_bars.each(function(index, item) {
-            var bar_height = this.offsetHeight;
-            var button = $('.yma_player_volume_button', this);
-            var button_height = button[0].offsetHeight;
-            var top = (bar_height * .75) - (button_height / 2);
-            button.css('bottom', top + 'px');
-            button.show();
-        });
-
-        volume_bars.click(function(event) {
-            console.log(event.offsetY);
-            console.log(event.target.offsetHeight);
+        $('.yma_player_volume_bar').click(function (event) {
+            console.log('offsetY: ', event.offsetY, ', offsetHeight: ', event.target.offsetHeight);
+            var volume = 1 - (event.offsetY / event.target.offsetHeight);
+            var player_id = $(this).attr('data-player-id');
+            var audio = $('audio#yma_player_audio_' + player_id)[0];
+            console.log('this: ', this, ', volume: ', volume, ', player_id: ', player_id, ', audi: ', audio);
+            audio.volume = volume;
         });
     });
-    
+
 }(window.jQuery));

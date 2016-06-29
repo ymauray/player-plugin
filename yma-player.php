@@ -1,15 +1,21 @@
 <?php
 /**
- * Plugin Name: Yannick's Player
- * Plugin URI: http://github.com/yannick.mauray/player-plugin
- * Description: A player plugin for PowerPress
- * Version: 0.0.1
- * Author: Yannick Mauray
- * Author URI: http://frenchguy.ch/
+ * Plugin Name:       Yannick's Player
+ * Plugin URI:        http://github.com/ymauray/yma-player
+ * Description:       A player plugin for PowerPress
+ * Version:           0.1.0
+ * Require WP:        4.5
  * Requires at least: 4.5
- * Tested up to: 4.5.2
- * Text Domain: player
- * License: GPL (http://www.gnu.org/licenses/old-licenses/gpl-2.0.txt)
+ * Tested up to:      4.5.2
+ * Require PHP:       5.3
+ * Author:            Yannick Mauray
+ * Author URI:        http://frenchguy.ch/
+ * Text Domain:       player
+ * Domain Path:       /languages
+ * License:           GPL
+ * Licence URI:       http://www.gnu.org/licenses/old-licenses/gpl-2.0.txt
+ * GitHub Plugin URI: https://github.com/ymauray/yma-player
+ * GitHub Branch:     master
  */
 
 define( 'PLAYER_MAIN_FILE', __FILE__ );
@@ -63,32 +69,32 @@ add_action( 'init', function () {
 function build_player_player( $media_url, $cue_sheet, $EpisodeData = array() ) {
 	global $post;
 	$player_id = powerpressplayer_get_next_id();
-	$cue_lines = preg_split("/\n/", $cue_sheet . '\r\n');
-	$intag = FALSE;
-	$options = '';
-	$title = '';
+	$cue_lines = preg_split( "/\n/", $cue_sheet . '\r\n' );
+	$intag     = false;
+	$options   = '';
+	$title     = '';
 	$performer = '';
-	$index = '';
+	$index     = '';
 	$timestamp = 0;
-	foreach ($cue_lines as $cue_line) {
+	foreach ( $cue_lines as $cue_line ) {
 		$clean_line = trim( $cue_line );
-		if (substr($clean_line, 0, 6) == 'TRACK ') {
+		if ( substr( $clean_line, 0, 6 ) == 'TRACK ' ) {
 			if ( $intag ) {
 				$options .= "<option value='{$title}' data-performer='{$performer}' data-index='{$timestamp}'>";
 			}
-			$intag = TRUE;
-		} else if (substr( $clean_line, 0, 6 ) == 'TITLE ') {
-			$title = substr( $clean_line, 7, -1 );
-		} else if (substr($clean_line, 0, 10) == 'PERFORMER ') {
-			$performer = substr( $clean_line, 11, - 1 );
-		} else if (substr($clean_line, 0, 9) == 'INDEX 01 ') {
-			$index = substr( $clean_line, 9 );
-			$numbers = explode(':', $index);
-			$timestamp = ((60 * 100 * $numbers[0]) + (100 * $numbers[1]) + $numbers[2]) / 100;
+			$intag = true;
+		} else if ( substr( $clean_line, 0, 6 ) == 'TITLE ' ) {
+			$title = esc_html( substr( $clean_line, 7, - 1 ) );
+		} else if ( substr( $clean_line, 0, 10 ) == 'PERFORMER ' ) {
+			$performer = esc_html( substr( $clean_line, 11, - 1 ) );
+		} else if ( substr( $clean_line, 0, 9 ) == 'INDEX 01 ' ) {
+			$index     = substr( $clean_line, 9 );
+			$numbers   = explode( ':', $index );
+			$timestamp = ( ( 60 * 100 * $numbers[0] ) + ( 100 * $numbers[1] ) + $numbers[2] ) / 100;
 		}
 	}
 	$options .= "<option value='{$title}' data-performer='{$performer}' data-index='{$timestamp}'>";
-	$content   = <<<EOF
+	$content = <<<EOF
 <div class="powerpress_player" id="powerpress_player_{$player_id}">
 	<div class="yma_player" id="yma_player_{$player_id}">
 		<div class="yma_player_display">
@@ -97,11 +103,11 @@ function build_player_player( $media_url, $cue_sheet, $EpisodeData = array() ) {
 		</div>
 		<div class="yma_player_play_button" data-player-id="{$player_id}"><i class="fa fa-play-circle"></i></div>
 		<div class="yma_player_background_bar" data-player-id="{$player_id}"></div>
-		<div class="yma_player_progress_bar" data-player-id="{$player_id}"></div>
-		<div class="yma_player_volume_bar data-player-id="{$player_id}">
+		<div class="yma_player_progress_bar init" data-player-id="{$player_id}"></div>
+		<div class="yma_player_volume_bar" data-player-id="{$player_id}">
 			<div class="yma_player_volume_button data-player-id="{$player_id}"></div>
 		</div>
-		<audio id="yma_player_audio_{$player_id}" data-player-id="{$player_id}">
+		<audio preload="metadata" id="yma_player_audio_{$player_id}" data-player-id="{$player_id}">
 			<source src="{$media_url}" type="{$EpisodeData['type']}">
 		</audio>
 		<datalist>{$options}</datalist>
