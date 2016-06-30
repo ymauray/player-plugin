@@ -4,14 +4,15 @@
 @background: #FFFFFF; /* @background: #FFFFFF; */
 
 .yma_player {
+  box-sizing: border-box;
   border-color: lightgrey;
   color: @color; /* color: @color; */
   border-width: 1px 0;
   border-style: solid;
-  height: (3 * @base); /* height: (3 * @base); */
+  height: (4 * @base); /* height: (3 * @base); */
   padding: (@base / 2) (3 * @base); /* padding: (@base / 2) (3 * @base); */
   position: relative;
-  box-sizing: content-box;
+  margin: @base 0; /* margin: @base 0; */
 
   *,
   *:before,
@@ -105,15 +106,15 @@
 
   .yma_player_volume_bar {
     position: absolute;
-    bottom: 0;
-    top: 0;
-    right: 0;
+    bottom: (@base / 4); /* bottom: (@base / 4); */
+    top: (@base / 4); /* top: (@base / 4); */
+    right: (@base / 2); /* right: (@base / 2); */
     border-width: 0 (.5 * @base); /* border-width: 0 (.5 * @base); */
     border-style: solid;
     border-color: @background; /* border-color: @background; */
     margin: (.5 * @base) 0; /* margin: (.5 * @base) 0; */
     cursor: pointer;
-    width: 1px;
+    width: (@base + 1); /* width: (@base + 1); */
     background-color: lightgray;
 
     .yma_player_volume_button {
@@ -126,6 +127,7 @@
       top: -2px;
       border-radius: @base;
       display: none;
+      transition: top .5s;
     }
   }
 

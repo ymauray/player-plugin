@@ -3,17 +3,19 @@
 /* color: #000000 */
 /* @background: #FFFFFF; */
 .yma_player {
+  box-sizing: border-box;
   border-color: lightgrey;
   color: #000000;
   /* color: @color; */
   border-width: 1px 0;
   border-style: solid;
-  height: 48px;
+  height: 64px;
   /* height: (3 * @base); */
   padding: 8px 48px;
   /* padding: (@base / 2) (3 * @base); */
   position: relative;
-  box-sizing: content-box;
+  margin: 16px 0;
+  /* margin: @base 0; */
 }
 .yma_player *,
 .yma_player *:before,
@@ -114,9 +116,12 @@
 }
 .yma_player .yma_player_volume_bar {
   position: absolute;
-  bottom: 0;
-  top: 0;
-  right: 0;
+  bottom: 4px;
+  /* bottom: (@base / 4); */
+  top: 4px;
+  /* top: (@base / 4); */
+  right: 8px;
+  /* right: (@base / 2); */
   border-width: 0 8px;
   /* border-width: 0 (.5 * @base); */
   border-style: solid;
@@ -125,7 +130,8 @@
   margin: 8px 0;
   /* margin: (.5 * @base) 0; */
   cursor: pointer;
-  width: 1px;
+  width: 17px;
+  /* width: (@base + 1); */
   background-color: lightgray;
 }
 .yma_player .yma_player_volume_bar .yma_player_volume_button {
@@ -138,4 +144,5 @@
   top: -2px;
   border-radius: 16px;
   display: none;
+  transition: top .5s;
 }

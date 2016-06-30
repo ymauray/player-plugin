@@ -9,13 +9,21 @@
             var target = event.target;
             var id = $(target).attr('data-player-id');
             var player = $('#yma_player_' + id);
+            console.log('Playing player ', id, player);
         });
 
-        audios.on('pause', function (a, b, c, d, e, f) {
-
+        audios.on('pause', function (event) {
+            var target = event.target;
+            var id = $(target).attr('data-player-id');
+            var player = $('#yma_player_' + id);
+            console.log('Paused player ', id, player);
         });
 
         audios.on('progress', function (event) {
+            var target = event.target;
+            var id = $(target).attr('data-player-id');
+            var player = $('#yma_player_' + id);
+            console.log('Progress player ', id, player);
         });
 
         audios.on('timeupdate', function (event) {
@@ -81,18 +89,18 @@
             $('.fa', $(this)).toggleClass('fa-play-circle');
             $('.fa', $(this)).toggleClass('fa-pause-circle');
             if (play_circle.length == 1) {
+                console.log('Start audio');
                 audio.play();
             } else {
+                console.log('Pause audio');
                 audio.pause();
             }
         });
 
         $('.yma_player_volume_bar').click(function (event) {
-            console.log('offsetY: ', event.offsetY, ', offsetHeight: ', event.target.offsetHeight);
             var volume = 1 - (event.offsetY / event.target.offsetHeight);
             var player_id = $(this).attr('data-player-id');
             var audio = $('audio#yma_player_audio_' + player_id)[0];
-            console.log('this: ', this, ', volume: ', volume, ', player_id: ', player_id, ', audi: ', audio);
             audio.volume = volume;
         });
     });
