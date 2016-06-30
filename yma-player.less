@@ -5,12 +5,12 @@
 
 .yma_player {
   box-sizing: border-box;
-  border-color: lightgrey;
+  border-color: lighten(@color, 83%); /* border-color: lighten(@color, 83%); */
   color: @color; /* color: @color; */
   border-width: 1px 0;
   border-style: solid;
-  height: (4 * @base); /* height: (3 * @base); */
-  padding: (@base / 2) (3 * @base); /* padding: (@base / 2) (3 * @base); */
+  height: (4 * @base); /* height: (4 * @base); */
+  padding: (.5 * @base) (3 * @base); /* padding: (.5 * @base) (3 * @base); */
   position: relative;
   margin: @base 0; /* margin: @base 0; */
 
@@ -49,7 +49,7 @@
 
   .yma_player_play_button {
     position: absolute;
-    top: (@base / 2); /* top: (@base / 2); */
+    top: (.5 * @base); /* top: (.5 * @base); */
     left: 0;
     margin: 0;
     padding: 0;
@@ -63,10 +63,9 @@
       width: (3 * @base); /* width: (3 * @base); */
       height: (3 * @base); /* height: (3 * @base); */
       line-height: (3 * @base); /* line-height: (3 * @base); */
+      color: @color; /* color: @color; */
+      transition: color .5s;
     }
-  }
-
-  .yma_player_progress_button {
   }
 
   .yma_player_progress_bar {
@@ -93,7 +92,7 @@
         right: -2px;
         height: 5px;
         width: 5px;
-        background-color: lightgray;
+        background-color: @color; /* background-color: @color; */
         border-radius: 3px;
       }
 
@@ -106,30 +105,34 @@
 
   .yma_player_volume_bar {
     position: absolute;
-    bottom: (@base / 4); /* bottom: (@base / 4); */
-    top: (@base / 4); /* top: (@base / 4); */
-    right: (@base / 2); /* right: (@base / 2); */
+    bottom: (.25 * @base); /* bottom: (.25 * @base); */
+    top: (.25 * @base); /* top: (.25 * @base); */
+    right: (.5 * @base); /* right: (.5 * @base); */
     border-width: 0 (.5 * @base); /* border-width: 0 (.5 * @base); */
     border-style: solid;
     border-color: @background; /* border-color: @background; */
     margin: (.5 * @base) 0; /* margin: (.5 * @base) 0; */
     cursor: pointer;
     width: (@base + 1); /* width: (@base + 1); */
-    background-color: lightgray;
+    background-color: lighten(@color, 83%); /* background-color: lighten(@color, 83%); */
 
     .yma_player_volume_button {
       content: '';
       position: absolute;
       left: -2px;
-      background-color: lightgray;
+      background-color: lighten(@color, 83%); /* background-color: lighten(@color, 83%); */
       width: 5px;
       height: 5px;
       top: -2px;
-      border-radius: @base;
+      border-radius: @base; /* border-radius: @base; */
       display: none;
-      transition: top .5s;
+      transition: top .5s, background-color .5s;
+    }
+
+    &:hover {
+      .yma_player_volume_button {
+        background-color: @color; /* background-color: @color; */
+      }
     }
   }
-
 }
-

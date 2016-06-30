@@ -6,11 +6,9 @@
 
         var audios = $('.yma_player audio');
 
-        /*
         audios.on('progress', function (event) {
             console.log(new Date(), 'progress');
         });
-        */
 
         audios.on('timeupdate', function (event) {
             var target = event.target;
@@ -37,7 +35,7 @@
                     break;
                 }
             }
-            var interval = setInterval(function() {
+            var interval = setInterval(function () {
                 player.attr('busy', '');
                 clearInterval(interval);
             }, 1000);
@@ -64,7 +62,11 @@
             var width = event.target.offsetWidth;
             var position = event.offsetX;
             var percent = position / width;
+            console.log('duration: ', audio.duration);
+            console.log('relative position: ', percent + '%');
+            console.log('new position: ', audio.duration * percent);
             audio.currentTime = audio.duration * percent;
+            console.log('error: ', audio.error);
         });
 
         $('.yma_player_play_button').click(function (event) {
