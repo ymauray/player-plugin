@@ -66,42 +66,42 @@
     }
   }
 
-  .yma_player_background_bar,
-  .yma_player_progress_bar {
-    position: absolute;
-    top: (-.6 * @base); /* top: (-.6 * @base); */
-    left: 0;
-    height: (.2 * @base); /* height: (.2 * @base); */
-    cursor: pointer;
-    border-radius: (.1 * @base); /* border-radius: (.1 * @base); */
-    border-width: (.5 * @base) 0; /* border-width: (.5 * @base) 0; */
-    border-style: solid;
-    border-color: transparent;
+  .yma_player_progress_button {
   }
 
-  .yma_player_background_bar {
+  .yma_player_progress_bar {
     width: 100%;
     background-color: transparent;
-  }
+    position: absolute;
+    top: -8px;
+    left: 0;
+    height: 15px;
+    cursor: pointer;
 
-  .yma_player_progress_bar {
-    width: 0;
-    background-color: transparent;
-
-    &:after {
+    .yma_player_progress_button {
       position: absolute;
-      top: (-.1 * @base); /* top: (-.1 * @base); */
-      right: (-.2 * @base); /* right: (-.2 * @base); */
-      width: (.4 * @base); /* width: (.4 * @base); */
-      height: (.4 * @base); /* height: (.4 * @base); */
-      content: '';
-      background: black;
-      border-radius: @base;
+      top: 7px;
+      left: 0px;
+      cursor: pointer;
+      transition: width .5s;
+      width: 0;
+
+      &:after {
+        position: absolute;
+        content: '';
+        top: -2px;
+        right: -2px;
+        height: 5px;
+        width: 5px;
+        background-color: lightgray;
+        border-radius: 3px;
+      }
+
+      &.init:after {
+        display: none;
+      }
     }
 
-    &.init:after {
-      display: none;
-    }
   }
 
   .yma_player_volume_bar {

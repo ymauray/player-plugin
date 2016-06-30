@@ -101,12 +101,13 @@ function build_player_player( $media_url, $cue_sheet, $EpisodeData = array() ) {
 			<div class="yma_player_track_info single"><span class="yma_player_artist single">—</span><span class="yma_player_title"></span></div>
 		</div>
 		<div class="yma_player_play_button" data-player-id="{$player_id}"><i class="fa fa-play-circle"></i></div>
-		<div class="yma_player_background_bar" data-player-id="{$player_id}"></div>
-		<div class="yma_player_progress_bar init" data-player-id="{$player_id}"></div>
+		<div class="yma_player_progress_bar" data-player-id="{$player_id}">
+			<div class="yma_player_progress_button init" data-player-id="{$player_id}"></div>
+		</div>
 		<div class="yma_player_volume_bar" data-player-id="{$player_id}">
 			<div class="yma_player_volume_button data-player-id="{$player_id}"></div>
 		</div>
-		<audio preload="metadata" id="yma_player_audio_{$player_id}" data-player-id="{$player_id}">
+		<audio preload="auto" id="yma_player_audio_{$player_id}" data-player-id="{$player_id}">
 			<source src="{$media_url}" type="{$EpisodeData['type']}">
 		</audio>
 		<datalist>{$options}</datalist>

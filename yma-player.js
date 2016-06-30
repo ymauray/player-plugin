@@ -5,34 +5,25 @@
     $(document).ready(function () {
 
         var audios = $('.yma_player audio');
-        audios.on('play', function (event) {
-            var target = event.target;
-            var id = $(target).attr('data-player-id');
-            var player = $('#yma_player_' + id);
-            console.log('Playing player ', id, player);
-        });
 
-        audios.on('pause', function (event) {
-            var target = event.target;
-            var id = $(target).attr('data-player-id');
-            var player = $('#yma_player_' + id);
-            console.log('Paused player ', id, player);
-        });
-
+        /*
         audios.on('progress', function (event) {
-            var target = event.target;
-            var id = $(target).attr('data-player-id');
-            var player = $('#yma_player_' + id);
-            console.log('Progress player ', id, player);
+            console.log(new Date(), 'progress');
         });
+        */
 
         audios.on('timeupdate', function (event) {
             var target = event.target;
             var id = $(target).attr('data-player-id');
             var player = $('#yma_player_' + id);
+            var busy = player.attr('busy');
+            if ('busy' == busy) {
+                return;
+            }
+            player.attr('busy', 'busy');
             if (target.duration > 0) {
                 var advance = 100 * target.currentTime / target.duration;
-                $('.yma_player_progress_bar', player).css('width', advance + '%').removeClass('init');
+                $('.yma_player_progress_button', player).css('width', advance + '%').removeClass('init');
             }
             var options = $('datalist option', player);
             for (var i = options.length - 1; i >= 0; i--) {
@@ -46,6 +37,10 @@
                     break;
                 }
             }
+            var interval = setInterval(function() {
+                player.attr('busy', '');
+                clearInterval(interval);
+            }, 1000);
         });
 
         audios.on('volumechange', function (event) {
@@ -63,22 +58,13 @@
             audio.volume = .75;
         });
 
-        $('.yma_player_background_bar').click(function (event) {
-            var player_id = $(this).attr('data-player-id');
-            var audio = $('audio#yma_player_audio_' + player_id)[0];
-            var width = event.target.offsetWidth;
-            var position = event.offsetX;
-            var percent = position / width;
-            audio.currentTime = audio.duration * percent;
-        });
-
         $('.yma_player_progress_bar').click(function (event) {
             var player_id = $(this).attr('data-player-id');
             var audio = $('audio#yma_player_audio_' + player_id)[0];
             var width = event.target.offsetWidth;
             var position = event.offsetX;
             var percent = position / width;
-            audio.currentTime = audio.currentTime * percent;
+            audio.currentTime = audio.duration * percent;
         });
 
         $('.yma_player_play_button').click(function (event) {
@@ -89,10 +75,8 @@
             $('.fa', $(this)).toggleClass('fa-play-circle');
             $('.fa', $(this)).toggleClass('fa-pause-circle');
             if (play_circle.length == 1) {
-                console.log('Start audio');
                 audio.play();
             } else {
-                console.log('Pause audio');
                 audio.pause();
             }
         });
