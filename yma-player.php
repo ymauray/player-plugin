@@ -105,7 +105,7 @@ function build_player_player( $media_url, $cue_sheet, $EpisodeData = array() ) {
 			<div class="yma_player_progress_button init" data-player-id="{$player_id}"></div>
 		</div>
 		<div class="yma_player_volume_bar" data-player-id="{$player_id}">
-			<div class="yma_player_volume_button data-player-id="{$player_id}"></div>
+			<div class="yma_player_volume_button" data-player-id="{$player_id}"></div>
 		</div>
 		<audio preload="auto" id="yma_player_audio_{$player_id}" data-player-id="{$player_id}">
 			<source src="{$media_url}" type="{$EpisodeData['type']}">
